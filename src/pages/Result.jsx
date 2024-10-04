@@ -43,6 +43,9 @@ const LogoImg = styled(motion.div)`
 const Desc = styled.div`
   margin: 10px 0;
   font-size: 22px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background-color: crimson;
 `;
 
 const Result = () => {
@@ -77,8 +80,8 @@ const Result = () => {
             src={resultData.image}
           />
         </LogoImg>
-        <Desc>예비집사님과 찰떡인 고양이는? '{resultData.name}'입니다! 😻</Desc>
-        <Desc>{resultData.desc} 😻</Desc>
+        <Desc>예비집사님과 찰떡인 고양이는? {resultData.name}입니다! 😻</Desc>
+
         <Button onClick={handleClickBtn}>테스트 다시 시작하기</Button>
       </Contents>
     </Wrapper>
