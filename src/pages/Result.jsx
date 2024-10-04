@@ -88,7 +88,7 @@ const Result = () => {
         <Desc>예비집사님과 찰떡인 고양이는? {resultData.name}입니다! 😻</Desc>
         <ButtonGroup>
           <Button onClick={handleClickBtn}>테스트 다시 시작하기</Button>
-          <KakaoShareBtn />
+          <KakaoShareBtn data={resultData} />
         </ButtonGroup>
       </Contents>
     </Wrapper>
