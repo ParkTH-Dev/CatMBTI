@@ -7,50 +7,104 @@ import { createSearchParams, useNavigate } from "react-router-dom";
 
 const Wrapper = styled(motion.div)`
   width: 100%;
-  height: 98vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
   color: #fff;
+  padding: 20px;
+`;
+
+const ProgressWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+
+  .progress {
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    .progress-bar {
+      background-color: #fff;
+    }
+  }
+`;
+
+const Contents = styled(motion.div)`
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 `;
 
 const Title = styled.div`
-  font-size: 30px;
-  padding: 8px 16px;
-  margin-bottom: 10px;
-  background-color: crimson;
-  border-radius: 8px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  border-radius: 15px;
+
   @media screen and (max-width: 780px) {
-    font-size: 24px;
-    margin: 20px;
+    font-size: 1.5rem;
+    padding: 0.8rem 1.5rem;
+    margin: 1rem;
   }
 `;
+
 const ButtonGroup = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  button {
-    width: 400px;
-    height: 200px;
-    font-size: 26px;
-  }
+  gap: 20px;
+  width: 100%;
+
   @media screen and (max-width: 780px) {
     flex-direction: column;
-    button {
-      width: 300px;
-      height: 150px;
-      font-size: 20px;
-    }
+    gap: 15px;
   }
-  @media screen and (max-width: 360px) {
-    flex-direction: column;
-    button {
-      width: 200px;
-      height: 100px;
-      font-size: 20px;
-    }
+`;
+
+const StyledButton = styled(Button)`
+  width: 100%;
+  max-width: 400px;
+  min-height: 120px;
+  padding: 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1e3c72;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  white-space: pre-wrap;
+  word-break: keep-all;
+  line-height: 1.5;
+
+  &:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  @media screen and (max-width: 780px) {
+    min-height: 100px;
+    font-size: 1rem;
+    padding: 1rem;
   }
 `;
 
@@ -63,47 +117,6 @@ const Question = () => {
     { id: "JP", score: 0 },
   ]);
   const navigate = useNavigate();
-
-  // const handleClickBtnA = (num, type) => {
-  //   if (type === "EI") {
-  //     const addScore = totalScore[0].score + num;
-  //     const newObj = { id: "EI", score: addScore };
-  //     totalScore.splice(0, 1, newObj);
-  //   } else if (type === "SN") {
-  //     const addScore = totalScore[1].score + num;
-  //     const newObj = { id: "SN", score: addScore };
-  //     totalScore.splice(1, 1, newObj);
-  //   } else if (type === "TF") {
-  //     const addScore = totalScore[2].score + num;
-  //     const newObj = { id: "TF", score: addScore };
-  //     totalScore.splice(2, 1, newObj);
-  //   } else {
-  //     const addScore = totalScore[3].score + num;
-  //     const newObj = { id: "JP", score: addScore };
-  //     totalScore.splice(3, 1, newObj);
-  //   }
-  //   setQuestionNum(questionNum + 1);
-  // };
-  // const handleClickBtnB = (num, type) => {
-  //   if (type === "EI") {
-  //     const addScore = totalScore[0].score + num;
-  //     const newObj = { id: "EI", score: addScore };
-  //     totalScore.splice(0, 1, newObj);
-  //   } else if (type === "SN") {
-  //     const addScore = totalScore[1].score + num;
-  //     const newObj = { id: "SN", score: addScore };
-  //     totalScore.splice(1, 1, newObj);
-  //   } else if (type === "TF") {
-  //     const addScore = totalScore[2].score + num;
-  //     const newObj = { id: "TF", score: addScore };
-  //     totalScore.splice(2, 1, newObj);
-  //   } else {
-  //     const addScore = totalScore[3].score + num;
-  //     const newObj = { id: "JP", score: addScore };
-  //     totalScore.splice(3, 1, newObj);
-  //   }
-  //   setQuestionNum(questionNum + 1);
-  // };
 
   const handleClickBtn = (num, type) => {
     const newScore = totalScore.map((item) =>
@@ -119,7 +132,6 @@ const Question = () => {
           (curr.score >= 2 ? curr.id.substring(0, 1) : curr.id.substring(1, 2)),
         ""
       );
-      console.log(mbti);
       navigate({
         pathname: "/result",
         search: `?${createSearchParams({
@@ -129,37 +141,35 @@ const Question = () => {
     }
   };
 
-  console.log(totalScore);
   return (
-    <>
-      <ProgressBar
-        striped
-        variant="danger"
-        now={(questionNum / QuestionData.length) * 100}
-      />
-      <Wrapper>
+    <Wrapper
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+    >
+      <ProgressWrapper>
+        <ProgressBar now={(questionNum / QuestionData.length) * 100} animated />
+      </ProgressWrapper>
+      <Contents>
         <Title>{QuestionData[questionNum].title}</Title>
         <ButtonGroup>
-          <Button
-            onClick={() =>
-              // handleClickButtonA(1, QuestionData[questionNum].type)
-              handleClickBtn(1, QuestionData[questionNum].type)
-            }
+          <StyledButton
+            as={motion.button}
+            whileHover={{ scale: 1.02 }}
+            onClick={() => handleClickBtn(1, QuestionData[questionNum].type)}
           >
             {QuestionData[questionNum].answera}
-          </Button>
-          <Button
-            onClick={() =>
-              // handleClickButtonB(0, QuestionData[questionNum].type)
-              handleClickBtn(0, QuestionData[questionNum].type)
-            }
+          </StyledButton>
+          <StyledButton
+            as={motion.button}
+            whileHover={{ scale: 1.02 }}
+            onClick={() => handleClickBtn(0, QuestionData[questionNum].type)}
           >
-            {" "}
             {QuestionData[questionNum].answerb}
-          </Button>
+          </StyledButton>
         </ButtonGroup>
-      </Wrapper>
-    </>
+      </Contents>
+    </Wrapper>
   );
 };
 

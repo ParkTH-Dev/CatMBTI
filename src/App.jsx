@@ -5,17 +5,15 @@ import Home from "./pages/Home";
 import Question from "./pages/Question";
 import Result from "./pages/Result";
 import reset from "styled-reset";
+import bg from "/img/bg.jpg";
 
 const GlobalStyle = createGlobalStyle`
-@font-face {
-  font-family:"SimKyungha" ;
-  src: url("/fonts/SimKyungha.ttf") format("truetype")
-}
 ${reset}
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Jua", sans-serif;
 }
 li,ul{
   list-style: none;
@@ -25,11 +23,11 @@ a{
   text-decoration: none;
 }
 body{
-  font-family: "SimKyungha";
-  background: url("https://images.pexels.com/photos/15511199/pexels-photo-15511199.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background: url(${bg});
   background-size: cover;
-  /* background-position: center; */
   background-repeat: no-repeat;
+  font-family: "Nanum Gothic", sans-serif;
+  
 }
 `;
 

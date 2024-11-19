@@ -7,68 +7,109 @@ import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: #fff;
-  overflow: hidden;
+  padding: 20px;
 `;
+
 const Header = styled.div`
-  font-size: 40px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 `;
+
 const Contents = styled(motion.div)`
   width: 100%;
-  height: auto;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 `;
+
 const Title = styled.div`
-  font-size: 30px;
-  margin: 20px 0 10px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
 `;
+
 const LogoImg = styled(motion.div)`
+  z-index: -1;
+  width: 280px;
+  height: 280px;
+  margin: 1rem 0;
+
   img {
-    border: 4px solid #fff;
-    width: 350px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   }
 `;
 
 const Desc = styled.div`
-  margin: 10px 0;
-  font-size: 20px;
-  padding: 8px 14px;
-  border-radius: 8px;
-  background-color: crimson;
+  margin: 1.5rem 0;
+  font-size: 1.2rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  text-align: center;
+`;
+
+const StyledButton = styled(Button)`
+  padding: 0.8rem 2.5rem;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  background: #fff;
+  color: #1e3c72;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
 `;
 
 const Home = () => {
   const constraintsRef = useRef(null);
+
   return (
     <Wrapper>
-      <Header>예비집사 판별기</Header>
-      <Contents ref={constraintsRef}>
-        <Title>나에게 맞는 주인님은?</Title>
+      <Header>✈️ MBTI 여행스타일 테스트</Header>
+      <Contents
+        ref={constraintsRef}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <Title>당신의 여행스타일은?</Title>
         <LogoImg
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.03 }}
+          transition={{ type: "spring", stiffness: 300 }}
         >
           <motion.img
             drag
             dragConstraints={constraintsRef}
-            className="rounded-circle"
-            src="/cat/ggompang.jpeg"
+            src="/img/home_img.jpg"
           />
         </LogoImg>
-        <Desc>MBTI 테스트로 나랑 잘 맞는 고양이 찾기 🐈</Desc>
+        <Desc>✨ 당신의 여행스타일로 알아보는 MBTI ✨</Desc>
         <Link to="question">
-          <Button>테스트 시작하기</Button>
+          <StyledButton>테스트 시작하기</StyledButton>
         </Link>
       </Contents>
     </Wrapper>
