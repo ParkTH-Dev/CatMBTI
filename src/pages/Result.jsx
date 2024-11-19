@@ -14,9 +14,20 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   color: #fff;
   padding: 20px;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); // 검은색 오버레이로 어둡게 처리
+    z-index: 0;
+  }
 `;
 
 const Header = styled.div`
@@ -25,9 +36,13 @@ const Header = styled.div`
   text-align: center;
   margin-bottom: 2rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
 `;
 
 const Contents = styled(motion.div)`
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 800px;
   display: flex;
@@ -38,7 +53,6 @@ const Contents = styled(motion.div)`
   border-radius: 20px;
   padding: 2rem;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  /* gap: 20px; */
 `;
 
 const Title = styled.div`
